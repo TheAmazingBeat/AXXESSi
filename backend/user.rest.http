@@ -1,0 +1,27 @@
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "username": "test2",
+  "email":"test3@test.com",
+  "firstName": "sample",
+  "lastName": "sampler",
+  "password": "testTest1!",
+  "age": "19",
+  "sex": "Male",
+  "patient_Data": "None"
+}
+
+###
+GET http://localhost:8080/users
+
+###
+PATCH http://localhost:8080/users/test2
+Content-Type: application/json
+
+{
+    "newPatientData": "Stage 4 Skin Cancer"
+
+}
+
