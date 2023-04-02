@@ -47,8 +47,8 @@ function validate(data) {
       password: passwordComplexity().required().label('Password'),
       firstName: Joi.string().required().label('First Name'),
       lastName: Joi.string().required().label('Last Name'),
-      age: Joi.string().required().label("Age"),
-      sex: Joi.string().required().label("Sex"),
+      age: Joi.string().label("Age"),
+      sex: Joi.string().label("Sex"),
       patient_Data: Joi.string().required().label("Patient Data")
     })
     return schema.validate(data)
