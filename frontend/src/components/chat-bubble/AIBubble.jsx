@@ -25,10 +25,10 @@ export default function AIBubble({ diseases, infos }) {
       <Grid container spacing={2} className='bubble-row'>
         <Grid item xs={6}>
           <div
-            className={styles.AIBubble}
+            className={styles.aiBubble}
             style={{
-              width: boxSize,
-              height: boxSize,
+              width: boxSize + 50,
+              height: boxSize + 80,
             }}
           >
             {diseases.map((disease, i) => {

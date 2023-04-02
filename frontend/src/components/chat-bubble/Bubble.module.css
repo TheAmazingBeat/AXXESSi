@@ -2,6 +2,7 @@
 .userBubble {
   position: relative;
   padding: 0.25rem;
+  border-radius: 5px;
 }
 .aiBubble::after,
 .userBubble::after {
@@ -14,9 +15,8 @@
   border-top-left-radius: 40px;
 
   position: absolute;
-  right: -16px;
   bottom: -21px;
-  transform: rotate(225deg);
+  z-index: -5;
 }
 
 .userBubble {
@@ -25,14 +25,18 @@
 }
 
 .userBubble::after {
+  transform: rotate(225deg);
+  right: -16px;
   border-top: 25px solid #234363;
 }
 
 .aiBubble {
-  background-color: aliceblue;
+  background-color: rgb(147, 180, 208);
 }
 .aiBubble::after {
-  border-top: 25px solid aliceblue;
+  transform: rotate(-225deg);
+  left: -16px;
+  border-top: 25px solid rgb(147, 180, 208);
 }
 
 .bubble-row {

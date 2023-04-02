@@ -12,8 +12,8 @@ export default function UserBubble({ prompts }) {
           <div
             className={styles.userBubble}
             style={{
-              width: boxSize,
-              height: boxSize,
+              width: boxSize + 50,
+              height: boxSize + 80,
             }}
           >
             {prompts.map((prompt, i) => {
