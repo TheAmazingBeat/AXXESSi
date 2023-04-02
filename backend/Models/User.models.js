@@ -61,3 +61,5 @@ function validate(data) {
 }
 
 export { User, validate }
+
+export { User, validate }
