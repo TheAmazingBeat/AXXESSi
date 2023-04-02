@@ -34,3 +34,7 @@
 .aiBubble::after {
   border-top: 25px solid aliceblue;
 }
+
+.bubble-row {
+  margin: 0 0 0 0.25rem;
+}
