@@ -96,26 +96,4 @@ async function scrape(diagnosis_list) {
   return textArray
 }
 
-async function scrape(diagnosis_list) {
-  const browser = await puppeteer.launch({})
-  const page = await browser.newPage()
-  let textArray = []
-
-  for (let i = 0; i < diagnosis_list.length; i++) {
-    try {
-      const disease = diagnosis_list[i]
-      const url = `https://medlineplus.gov/${disease}.html`
-
-      await page.goto(url)
-      let element = await page.waitForXPath('//*[@id="topic-summary"]/p[1]')
-      let text = await page.evaluate((element) => element.textContent, element)
-      textArray.push(text)
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-  browser.close()
-  return textArray
-}
-
 export { router as SymptomsRouter }
