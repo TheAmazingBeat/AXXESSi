@@ -1,6 +1,7 @@
 import express from 'express'
 import createHttpError from 'http-errors'
 import dotenv from 'dotenv'
+import cors from 'cors'
 dotenv.config()
 import db from './db.js'
 
@@ -11,6 +12,7 @@ import { ChatlogRouter } from './Routes/Chatlog.routes.js'
 const app = express()
 const PORT = process.env.PORT || 8080
 app.use(express.json())
+app.use(cors())
 
 db()
 
