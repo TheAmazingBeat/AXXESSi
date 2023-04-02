@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './Login.css'
+import Button from '../../components/button/Button'
 import Banner from '../../components/banner/Banner'
 import { Container, Box, TextField, Grid } from '@mui/material'
 import { useNavigate, Link } from 'react-router-dom'
 
 function Login({ setIsLoggedIn }) {
-  const navigate = useNavigate
+  const navigate = useNavigate()
   const [userData, setUserData] = useState({
     email: '',
     password: '',
@@ -38,7 +39,7 @@ function Login({ setIsLoggedIn }) {
         }
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error)
     }
   }
 
@@ -84,9 +85,7 @@ function Login({ setIsLoggedIn }) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <button type='submit' className='login-btn'>
-                    Log In
-                  </button>
+                  <Button label='Log In' type='submit' />
                   <Link to='/signup'>
                     <p className='login-sign-link'>Need an account? Sign Up.</p>
                   </Link>

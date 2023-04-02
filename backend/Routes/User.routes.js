@@ -70,17 +70,17 @@ router.post('/', async (req, res, next) => {
 })
 
 //updating patient data
-router.patch('/:username', async (req, res, next) => {
+router.patch('/:email', async (req, res, next) => {
   try {
-    const username = req.params.username
+    const email = req.params.email
     const update = req.body.newPatientData
     const options = { new: true }
 
-    console.log(username)
+    console.log(email)
     console.log(update)
     const result = await User.findOneAndUpdate(
       {
-        username: username,
+        email: email,
       },
       {
         patient_Data: update,

@@ -7,8 +7,8 @@ const router = express.Router()
 
 router.post('/', async (req, res) => {
   try {
-    const { prompt, username } = req.body
-    const templatePrompt = `Given these symptoms: ${prompt}. List the top 4 health issues one could have.`
+    const { prompt, email } = req.body
+    const templatePrompt = `Given these symptoms: ${prompt}. List the top 3 health issues one could have.`
 
     const response = await axios.post(
       'https://api.openai.com/v1/completions',
@@ -33,6 +33,10 @@ router.post('/', async (req, res) => {
         diagnosis = 'flu'
         diagnosis_list[0] = diagnosis
       }
+      if (diagnosis.indexOf('Allergic') > 0) {
+        diagnosis = 'hayfever'
+        diagnosis_list[0] = diagnosis
+      }
       if (diagnosis.indexOf('(') > 0) {
         diagnosis_list[i] = diagnosis
           .substring(diagnosis.indexOf('(') + 1, diagnosis.indexOf(')'))
@@ -47,16 +51,15 @@ router.post('/', async (req, res) => {
     }
 
     console.log(diagnosis_list)
-    // scrape(diagnosis_list)
 
     console.log('Response from GPT :: ', chatResponse)
 
     // Adding prompt to database
     // Adding chatResponse to database
-    let existingChat = await Chatlog.findOne({ username: username })
+    let existingChat = await Chatlog.findOne({ email: email })
     existingChat.chatlog.push(templatePrompt, chatResponse)
     const addChat = await Chatlog.updateOne(
-      { username: username },
+      { email: email },
       {
         chatlog: existingChat.chatlog,
       }
@@ -69,7 +72,7 @@ router.post('/', async (req, res) => {
       addedToChat: addChat.chatlog,
     })
   } catch (error) {
-    console.log('From Symptoms Route :: ', error.message)
+    console.log('From Symptoms Route :: ', error)
     res.send(error.message)
   }
 })

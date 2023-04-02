@@ -1,6 +1,7 @@
 import './Signup.css'
 import React, { useState } from 'react'
 import axios from 'axios'
+import Button from '../../components/button/Button'
 import Banner from '../../components/banner/Banner'
 import { Container, Box, Grid, TextField } from '@mui/material'
 import { useNavigate, Link } from 'react-router-dom'
@@ -27,6 +28,7 @@ export default function Signup({ setIsLoggedIn }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log(userData)
     const postUrl = 'http://localhost:8080/users'
 
     try {
@@ -117,7 +119,7 @@ export default function Signup({ setIsLoggedIn }) {
               />
             </Grid>
             <Grid item xs={12}>
-              <button type='submit'>Sign Up</button>
+              <Button label='Sign Up' type='submit' />
             </Grid>
             <Grid item xs={12}>
               <Link to='/login'>
