@@ -3,8 +3,10 @@ import axios from 'axios'
 import './Login.css'
 import Banner from '../../components/banner/Banner'
 import { Container, Box, TextField, Grid } from '@mui/material'
+import { useNavigate, Link } from 'react-router-dom'
 
-function Login() {
+function Login({ setIsLoggedIn }) {
+  const navigate = useNavigate
   const [userData, setUserData] = useState({
     email: '',
     password: '',
@@ -14,7 +16,7 @@ function Login() {
 
   const handleChange = (e) => {
     e.preventDefault()
-    setProjectData((prevState) => ({
+    setUserData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }))
@@ -23,14 +25,17 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const body = {
+      const response = await axios.post('http://localhost:8080/users/login', {
         email: email,
         password: password,
-      }
-      const response = await axios.post('/users/login', body)
+      })
       if (response.status === 200) {
-        console.log(response.data.data.token)
-        if (response.data.data.token) sessionStorage.setItem('token', token)
+        const token = response.data.data.token
+        if (token) {
+          setIsLoggedIn(true)
+          sessionStorage.setItem('token', token)
+          navigate('/chat')
+        }
       }
     } catch (error) {
       console.log(error.message)
@@ -58,6 +63,7 @@ function Login() {
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <TextField
+                    id='email'
                     variant='standard'
                     label='Email'
                     type='email'
@@ -68,6 +74,7 @@ function Login() {
 
                 <Grid item xs={12}>
                   <TextField
+                    id='password'
                     variant='standard'
                     label='Password'
                     type='password'
@@ -80,7 +87,9 @@ function Login() {
                   <button type='submit' className='login-btn'>
                     Log In
                   </button>
-                  <p className='login-sign-link'>Need an account? Sign Up.</p>
+                  <Link to='/signup'>
+                    <p className='login-sign-link'>Need an account? Sign Up.</p>
+                  </Link>
                 </Grid>
               </Grid>
             </Grid>

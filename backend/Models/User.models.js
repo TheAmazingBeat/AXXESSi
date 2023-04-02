@@ -28,19 +28,14 @@ const userSchema = new Schema({
   },
   patient_Data: {
     type: String,
-    require: true,
   },
 })
 
-userSchema.methods.generateAuthToken = () => {
-  const token = jwt.sign(
-    { email: email, firstName: firstName, lastName: lastName },
-    process.env.JWT_PRIVATE_KEY,
-    {
-      algorithm: 'RS256',
-      expiresIn: '7d',
-    }
-  )
+userSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign({ _id: this._id }, process.env.JWT_PRIVATE_KEY, {
+    algorithm: 'RS256',
+    expiresIn: '7d',
+  })
   return token
 }
 
@@ -54,7 +49,7 @@ function validate(data) {
     lastName: Joi.string().required().label('Last Name'),
     age: Joi.string().label('Age'),
     sex: Joi.string().label('Sex'),
-    patient_Data: Joi.string().required().label('Patient Data'),
+    patient_Data: Joi.string().label('Patient Data'),
   })
   return schema.validate(data)
 }

@@ -2,21 +2,27 @@ import express from 'express'
 import createHttpError from 'http-errors'
 import { User, validate } from '../Models/User.models.js'
 import bcrypt from 'bcrypt'
-import mongoose from 'mongoose'
+import Joi from 'joi'
 
 const router = express.Router()
 
 // login user
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body
+    const { error } = validator(req.body)
+    if (error)
+      return res.status(400).json({ message: error.details[0].message })
+
     // Get user by email
-    const user = await User.findOne({ email: email })
+    const user = await User.findOne({ email: req.body.email })
     if (!user)
       return res.status(401).json({ message: 'Invalid email or password' })
 
     // Check password
-    const passwordCompare = await bcrypt.compare(password, user.password)
+    const passwordCompare = await bcrypt.compare(
+      req.body.password,
+      user.password
+    )
     if (!passwordCompare)
       return res.status(401).json({ message: 'Invalid email or password' })
 
@@ -26,7 +32,10 @@ router.post('/login', async (req, res) => {
         token: token,
       },
     })
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+    res.send(error.message)
+  }
 })
 
 //create a user
@@ -86,5 +95,13 @@ router.patch('/:username', async (req, res, next) => {
     res.send(error.message)
   }
 })
+
+function validator(data) {
+  const schema = Joi.object({
+    email: Joi.string().required().label('email'),
+    password: Joi.string().required().label('Password'),
+  })
+  return schema.validate(data)
+}
 
 export { router as UserRoute }

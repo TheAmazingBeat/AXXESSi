@@ -11,7 +11,6 @@ export default function Signup() {
     lastName: '',
     email: '',
     password: '',
-    confirmPassword: '',
   })
 
   let { firstName, lastName, email, password } = userData
@@ -85,15 +84,6 @@ export default function Signup() {
           className='login-form-field'
           name='password'
           value={userData.password}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type='password'
-          placeholder='Confirm Password'
-          className='login-form-field'
-          name='confirmPassword'
-          value={userData.confirmPassword}
           onChange={handleChange}
           required
         />
