@@ -61,7 +61,7 @@ router.post('/', async (req, res, next) => {
       password: hashPassword,
     }).save()
 
-    res.send(result)
+    res.status(200).send(result)
   } catch (error) {
     console.log(error.message)
     if (error.name === 'ValidationError')

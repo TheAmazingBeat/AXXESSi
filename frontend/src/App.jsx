@@ -13,7 +13,10 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Starter />}></Route>
-          <Route path='/signup' element={<Signup />}></Route>
+          <Route
+            path='/signup'
+            element={<Signup setIsLoggedIn={setIsLoggedIn} />}
+          ></Route>
           <Route
             path='/login'
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
