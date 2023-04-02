@@ -1,0 +1,35 @@
+.Starter {
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  background-image: url('https://i.imgur.com/ZxduLq7.png');
+  border: 2px solid red;
+  background-position: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.Starter-Link {
+  text-decoration: none;
+  color: white;
+}
+
+.Starter-button {
+  margin-top: 40rem;
+  background: #234363;
+  border-radius: 20px;
+  filter: drop-shadow(0px 4px 0px #7492b0);
+  text-align: center;
+  padding: 0.5rem 3rem;
+  border: 0;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: -0.03em;
+}

@@ -1,0 +1,17 @@
+.example {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: aquamarine;
+}
+
+.example::after {
+  display: inline-block;
+  position: absolute;
+  content: '';
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  bottom: -15px;
+  right: 0;
+}

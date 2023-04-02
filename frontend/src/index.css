@@ -1,0 +1,21 @@
+:root {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+#root {
+  height: 100svh;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  height: 100%;
+}
